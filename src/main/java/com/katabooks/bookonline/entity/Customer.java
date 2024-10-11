@@ -1,6 +1,7 @@
 package com.katabooks.bookonline.entity;
 
-import java.time.LocalDate;
+// import java.time.LocalDate;
+import java.util.Date;
 
 // import jakarta.persistence.GeneratedValue;
 // import jakarta.persistence.GenerationType;
@@ -18,7 +19,7 @@ public class Customer {
 
     private String name;
     private String email;
-    private LocalDate dob;
+    private Date dob;
     private String gender;
 
 
@@ -41,10 +42,10 @@ public class Customer {
     public void setEmail(String email) {
         this.email = email;
     }
-    public LocalDate getDob() {
+    public Date getDob() {
         return dob;
     }
-    public void setDob(LocalDate dob) {
+    public void setDob(Date dob) {
         this.dob = dob;
     }
     public String getGender() {
