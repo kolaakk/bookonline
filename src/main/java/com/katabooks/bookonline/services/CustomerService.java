@@ -40,6 +40,7 @@ public class CustomerService {
     customerRepo.deleteById(customerId);
 
    }
-
+   public boolean emailExists(String email) { 
+    return customerRepo.findByEmail(email).isPresent(); }
 
 }

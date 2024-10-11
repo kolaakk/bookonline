@@ -6,6 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+
 import java.util.Date;
 @Entity
 public class OrderBook {
@@ -22,6 +25,10 @@ public class OrderBook {
     @ManyToOne
     @JoinColumn(name = "book_id")
     private Book book;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date orderDate;
+
 
     public Long getOrderId() {
         return orderId;
@@ -55,7 +62,6 @@ public class OrderBook {
         this.orderDate = orderDate;
     }
 
-    private Date orderDate;
-
+    
 
 }

@@ -1,5 +1,8 @@
 package com.katabooks.bookonline.entity;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,9 +21,15 @@ public class Book {
     @Column(name ="book_id")
     private long bookId;
 
+
+    @NotNull(message ="Title cannot be empty")
     private String title;
+    @NotNull(message ="Author cannot be empty")
     private String author;
+    @NotNull(message ="Price cannot be null")
+    @Min(value =0 , message = "Price must be a positive value")
     private double price;
+    @Min(value =0 , message = "Stock must be a positive value")
     private int stock;
 
     public long getBookId() {

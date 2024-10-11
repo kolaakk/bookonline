@@ -10,9 +10,13 @@ package com.katabooks.bookonline.controller;
 import com.katabooks.bookonline.entity.Customer;
 import com.katabooks.bookonline.services.CustomerService;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 // import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/customers")
@@ -37,10 +41,17 @@ public class CustomerController {
        return customerService.getCustomerById(customerId);
 
     }
-    @PostMapping
-    public Customer savCustomer(@RequestBody Customer customer){
-        return customerService.saveCustomer(customer);
-    }
+    // @PostMapping
+    // public Customer savCustomer(@RequestBody Customer customer){
+    //     return customerService.saveCustomer(customer);
+    // }
+@PostMapping public ResponseEntity<?> createCustomer(@Valid @RequestBody Customer customer) 
+{ if (customerService.emailExists(customer.getEmail())) 
+    { return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already exists"); 
+} Customer savedCustomer = customerService.saveCustomer(customer); 
+return ResponseEntity.status(HttpStatus.CREATED).body(savedCustomer); 
+}
+
     @DeleteMapping("/{customerId}")
     public void deleteCustomer(@PathVariable Long customerId){
         customerService.deleteCustomer(customerId);
